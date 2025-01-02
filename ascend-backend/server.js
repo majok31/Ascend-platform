@@ -9,5 +9,16 @@ app.get('/api/test', (req, res) => {
   res.send({ message: 'Backend is connected!' });
 });
 
-const PORT = 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const { Pool } = require('pg');
+
+const pool = new Pool({
+  user: 'postgres',
+  host: 'localhost',
+  database: 'ascend',
+  password: 'Nyabor27',
+  port: 5432,
+});
+
+pool.connect()
+  .then(() => console.log('PostgreSQL connected successfully'))
+  .catch(err => console.error('PostgreSQL connection error:', err));
